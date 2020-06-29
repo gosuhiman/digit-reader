@@ -1,21 +1,22 @@
+import math
 import numpy as np
 from random import randint
 from sklearn.utils import shuffle
 from sklearn.preprocessing import MinMaxScaler
 
 
-def get_train_samples():
+def get_train_samples(count=2000):
     train_labels = []
     train_samples = []
 
-    for i in range(50):
+    for i in range(math.ceil(count * 0.05)):
         train_samples.append(randint(13, 64))
         train_labels.append(1)
 
         train_samples.append(randint(65, 100))
         train_labels.append(0)
 
-    for i in range(1000):
+    for i in range(math.ceil(count * 0.45)):
         train_samples.append(randint(13, 64))
         train_labels.append(0)
 

@@ -16,5 +16,10 @@ model.summary()
 model.compile(optimizer=Adam(learning_rate=0.0001), loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
 train_samples, train_labels = get_train_samples()
+model.fit(x=train_samples, y=train_labels, validation_split=0.1, batch_size=10, epochs=30, shuffle=True, verbose=2)
 
-model.fit(x=train_samples, y=train_labels, batch_size=10, epochs=30, shuffle=True, verbose=2)
+test_samples, test_labels = get_train_samples(200)
+predictions = model.predict(test_samples, batch_size=10, verbose=0)
+
+for i in predictions:
+    print(i)
