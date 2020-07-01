@@ -11,12 +11,14 @@ for set_name in sets:
     labels = data_dict[set_name + '_labels']
     number_of_samples = images.shape[0]
     for i in range(number_of_samples):
-        print(set, i)
+        print(set_name, i)
         image = images[i]
         label = labels[i]
 
-        if not os.path.exists(data_path + set_name + '/' + str(label) + '/'):
-            os.makedirs(data_path + set_name + '/' + str(label) + '/')
+        path = data_path + 'images/' + set_name + '/' + str(label) + '/'
 
-        file_number = len(os.listdir(data_path + set_name + '/' + str(label) + '/'))
-        imsave(data_path + set_name + '/' + str(label) + '/%05d.png' % file_number, image)
+        if not os.path.exists(path):
+            os.makedirs(path)
+
+        file_number = len(os.listdir(path))
+        imsave(path + '%05d.png' % file_number, image)
