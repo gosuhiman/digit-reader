@@ -1,9 +1,11 @@
 import tensorflow as tf
-from tensorflow import keras
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Activation, Dense
+from tensorflow.keras.layers import Dense
 from tensorflow.keras.optimizers import Adam
-from tensorflow.keras.metrics import categorical_crossentropy
+from sklearn.metrics import confusion_matrix
+import numpy as np
+import seaborn as sn
+import matplotlib.pyplot as plt
 from create_sample_set import get_train_samples
 
 model = Sequential([
@@ -20,6 +22,12 @@ model.fit(x=train_samples, y=train_labels, validation_split=0.1, batch_size=10, 
 
 test_samples, test_labels = get_train_samples(200)
 predictions = model.predict(test_samples, batch_size=10, verbose=0)
+classified_predictions = np.argmax(predictions, axis=-1)
 
-for i in predictions:
-    print(i)
+cm = confusion_matrix(test_labels, classified_predictions)
+plt.figure()
+plt.title('Confusion Matrix')
+sn.heatmap(cm, cmap='coolwarm', annot=True, fmt='.5g')
+plt.xlabel('Predicted')
+plt.ylabel('Actual')
+plt.show()

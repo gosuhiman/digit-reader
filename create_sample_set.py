@@ -9,14 +9,14 @@ def get_train_samples(count=2000):
     train_labels = []
     train_samples = []
 
-    for i in range(math.ceil(count * 0.05)):
+    for i in range(math.ceil(count * 0.02)):
         train_samples.append(randint(13, 64))
         train_labels.append(1)
 
         train_samples.append(randint(65, 100))
         train_labels.append(0)
 
-    for i in range(math.ceil(count * 0.45)):
+    for i in range(math.ceil(count * 0.48)):
         train_samples.append(randint(13, 64))
         train_labels.append(0)
 
