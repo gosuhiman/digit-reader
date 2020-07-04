@@ -15,7 +15,13 @@ classes = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 batch_size = 5
 epochs_count = 10
 
-train_data_generator = ImageDataGenerator(validation_split=0.1)
+train_data_generator = ImageDataGenerator(
+    validation_split=0.1,
+    rotation_range=10,
+    width_shift_range=0.1,
+    height_shift_range=0.1,
+    shear_range=0.15
+)
 
 train_directory_iterator = train_data_generator.flow_from_directory(
     train_path,
@@ -38,7 +44,7 @@ model = Sequential([
     Conv2D(48, (7, 7), activation='relu', input_shape=(28, 28, 1)),
     MaxPooling2D(),
     Flatten(),
-    Dense(24, activation='relu'),
+    Dense(48, activation='relu'),
     Dense(10, activation='softmax'),
 ])
 
