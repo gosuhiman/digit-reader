@@ -7,8 +7,7 @@ import matplotlib.pyplot as plt
 
 # Paths
 model_path = 'models/'
-data_path = 'data/mnist/images/'
-test_path = data_path + 'test'
+test_path = 'data/my-digits'
 batch_size = 1000
 
 image_size = (28, 28)
