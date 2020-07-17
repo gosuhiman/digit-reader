@@ -41,8 +41,10 @@ validation_directory_iterator = train_data_generator.flow_from_directory(
 )
 
 model = Sequential([
-    Conv2D(48, (7, 7), activation='relu', input_shape=(28, 28, 1)),
-    MaxPooling2D(),
+    Conv2D(32, (5, 5), activation='relu', input_shape=(28, 28, 1)),
+    MaxPooling2D(pool_size=(3, 3)),
+    Conv2D(32, (3, 3), activation='relu'),
+    MaxPooling2D(pool_size=(2, 2)),
     Flatten(),
     Dense(48, activation='relu'),
     Dense(10, activation='softmax'),
