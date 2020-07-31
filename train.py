@@ -27,6 +27,7 @@ train_directory_iterator = train_data_generator.flow_from_directory(
     train_path,
     target_size=image_size,
     classes=classes,
+    class_mode='sparse',
     batch_size=batch_size,
     color_mode='grayscale',
     subset='training'
@@ -35,6 +36,7 @@ validation_directory_iterator = train_data_generator.flow_from_directory(
     train_path,
     target_size=image_size,
     classes=classes,
+    class_mode='sparse',
     batch_size=batch_size,
     color_mode='grayscale',
     subset='validation'
@@ -51,13 +53,13 @@ model = Sequential([
 ])
 
 model.summary()
-model.compile(optimizer=Adam(learning_rate=0.0001), loss='categorical_crossentropy', metrics=['accuracy'])
+model.compile(optimizer=Adam(learning_rate=0.0001), loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
 model.fit(
     train_directory_iterator,
     validation_data=validation_directory_iterator,
-    steps_per_epoch=train_directory_iterator.samples / epochs_count,
-    validation_steps=validation_directory_iterator.samples / epochs_count,
+    steps_per_epoch=train_directory_iterator.samples / batch_size,
+    validation_steps=validation_directory_iterator.samples / batch_size,
     epochs=epochs_count
 )
 

@@ -4,26 +4,29 @@ from sklearn.metrics import confusion_matrix
 import numpy as np
 import seaborn as sn
 import matplotlib.pyplot as plt
+import os
 
 # Paths
-model_path = 'models/'
-test_path = 'data/my-digits'
-# test_path = 'data/mnist/images/test'
+model_path = 'models'
+data_path = 'data'
+test_data_path = os.path.join(data_path, 'my-digits')
+# test_data_path = os.path.join(data_path, 'mnist', 'images', 'test')
 batch_size = 1000
 
 image_size = (28, 28)
 classes = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
 test_batches = ImageDataGenerator().flow_from_directory(
-    test_path,
+    test_data_path,
     target_size=image_size,
     classes=classes,
+    class_mode='sparse',
     batch_size=batch_size,
     color_mode='grayscale',
     shuffle=False
 )
 
-model = load_model(model_path + 'model.h5')
+model = load_model(os.path.join(model_path, 'model.h5'))
 
 model.evaluate(test_batches)
 
