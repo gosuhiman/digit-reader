@@ -21,3 +21,6 @@ MNIST test data set - `0.9866` accuracy
 My own digits data set - `0.9615` accuracy
 
 ![My own data set confusion matrix](docs/confusion-matrix-my-digits.png)
+
+### No augmentation
+Without augmentation (train-pure.py) I get higher accuracy `0.99`++ on mnist dataset, but it fails miserably on my own data set.
