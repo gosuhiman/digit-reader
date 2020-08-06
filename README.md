@@ -1,4 +1,4 @@
-# digit-reader
+# mnist-classifier
 
 Model
 ```
