@@ -1,3 +1,4 @@
+import tensorflow as tf
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from sklearn.metrics import confusion_matrix
@@ -6,11 +7,16 @@ import seaborn as sn
 import matplotlib.pyplot as plt
 import os
 
+config = tf.compat.v1.ConfigProto()
+config.gpu_options.allow_growth = True
+config.log_device_placement = True
+sess = tf.compat.v1.Session(config=config)
+
 # Paths
 model_path = 'models'
 data_path = 'data'
-test_data_path = os.path.join(data_path, 'my-digits')
-# test_data_path = os.path.join(data_path, 'mnist', 'images', 'test')
+# test_data_path = os.path.join(data_path, 'my-digits')
+test_data_path = os.path.join(data_path, 'mnist', 'images', 'test')
 batch_size = 1000
 
 image_size = (28, 28)

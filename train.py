@@ -1,8 +1,14 @@
+import tensorflow as tf
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Dense, Flatten
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 import os
+
+config = tf.compat.v1.ConfigProto()
+config.gpu_options.allow_growth = True
+config.log_device_placement = True
+sess = tf.compat.v1.Session(config=config)
 
 # Paths
 
@@ -12,7 +18,7 @@ train_path = data_path + 'train'
 
 image_size = (28, 28)
 classes = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-batch_size = 5
+batch_size = 50
 epochs_count = 10
 
 train_data_generator = ImageDataGenerator(
